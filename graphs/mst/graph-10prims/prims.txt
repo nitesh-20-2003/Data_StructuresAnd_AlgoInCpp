@@ -1,0 +1,9 @@
+-DS visited set,priority_queue<pair>,unordered_map
+-insert the pair of -1 ,src in the priority_queue
+-one  by one remove the root element of the priority_queue
+-if the root element is already visited than continue;
+-we store the wt of the pair in the ans
+-update the mapping
+-- go the every neighbour of the current element and only add those which are non visited and have a better wt proposition.
+priority_queue->(wt,node);//node represent the parent or src
+-- map=> (node,wt); while here node represent the neighbour of src for the updation
