@@ -1,21 +1,36 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <set>
+
 using namespace std;
-int main()
-{
-int t;
-cin>>t;
-vector<int>input(t);
-unordered_set<int>visited;
-for(int i=0;i<t;i++)cin>>input[i];
-vector<vector<int>>dp(t+1,vector<int>(t+1,0));
 
-for(int i=0;i<t;i++ )dp[i][i]=input[i];
-
-    for(int len=2;len<=t;len++){
-        for(int i=0;i<=len-1;i++){
-            int j=i+len-1;
-
-        }
+int main() {
+    int n;
+    cin >> n;
+    vector<int> coins(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> coins[i];
     }
-return 0;
+
+    set<int> possible_sums;
+    possible_sums.insert(0);
+
+    for (int coin : coins) {
+        set<int> new_sums;
+        for (int sum : possible_sums) 
+        {
+            new_sums.insert(sum + coin);
+        }
+        possible_sums.insert(new_sums.begin(), new_sums.end());
+    }
+
+    possible_sums.erase(0);  // Remove the initial zero which isn't a valid sum
+    
+    cout << possible_sums.size() << endl;
+    for (int sum : possible_sums) {
+        cout << sum << " ";
+    }
+    cout << endl;
+
+    return 0;
 }

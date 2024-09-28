@@ -1,58 +1,61 @@
-#include<iostream>
-#include<vector>
-#include<list>
-#include<unordered_set>
+#include <iostream>
+#include <vector>
+#include <list>
+#include <unordered_set>
 using namespace std;
-vector<list<int>>graph;
 
-unordered_set<int>visited;
-int v;//nmbeer of vertices
-void  add_edge(int src,int dest,bool bi_dir=true)
-{
-    
+vector<list<int>> graph;  // Adjacency list to represent the graph
+unordered_set<int> visited;  // Set to keep track of visited nodes
+int v;  // Number of vertices
+
+void add_edge(int src, int dest, bool bi_dir = true) {
     graph[src].push_back(dest);
-    if(bi_dir)
-    graph[dest].push_back(src);
+    if (bi_dir) {
+        graph[dest].push_back(src);
+    }
 }
-bool dfs(int curr,int end)
-{
-    if(curr==end )return true;
-    visited.insert(curr);
-    for(auto neigbour: graph[curr])
-    {
-        if(! visited.count(neigbour)){
-            bool result=dfs(neigbour,end);
-            if(result)return true;
+
+bool dfs(int curr, int dest) {
+    // Print the current node and its neighbors
+    cout << "Visiting node " << curr << " with neighbors: ";
+    for (auto neighbor : graph[curr]) {
+        cout << neighbor << " ";
+    }
+    cout << endl;
+
+    if (curr == dest) return true;  // Found the destination
+    visited.insert(curr);  // Mark current node as visited
+
+    for (auto neighbor : graph[curr]) {
+        if (!visited.count(neighbor)) {
+            if (dfs(neighbor, dest)) return true;  // Recursively visit neighbors
         }
     }
-    return false;
-  
+    return false;  // No path found
 }
 
-bool any_path(int src,int dest)
-{
-    return dfs(src,dest);
-}
-int main()
-{
-    cin>>v;
-    graph.resize(v,list<int>());
+int main() {
+    cin >> v;
+    graph.resize(v + 1);  // Resize graph to handle 1-based indexing
 
     int e;
-    cin>>e;
-    visited.clear();
-    while(e>0)
-    {
-
-        int src;
-        int dest;
-        cin>>src>>dest;
-        add_edge(src,dest,false);
-        e--;
+    cin >> e;
+    
+    while (e--) {
+        int src, dest;
+        cin >> src >> dest;
+        add_edge(src, dest, false);  // Add edge to the graph
     }
-    int x,y;
-    cin>>x>>y;
-   
-    cout<<any_path(x,y);
+
+    int x, y;
+    cin >> x >> y;
+
+    visited.clear();  // Clear visited set before DFS
+    if (dfs(x, y)) {
+        cout << "Path exists from " << x << " to " << y << endl;
+    } else {
+        cout << "No path exists from " << x << " to " << y << endl;
+    }
+
     return 0;
 }

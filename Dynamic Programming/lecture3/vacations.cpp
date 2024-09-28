@@ -9,7 +9,6 @@ int n=3;
 vector<vector<int> >dp(n,vector<int>(3,0));
 //base case 
 int a,b,c;
-cout<<"hello world"<<endl;
 cin>>a>>b>>c;
 
 dp[0][0]=a;
