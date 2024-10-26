@@ -17,7 +17,7 @@ using namespace std;
 #define vvi vector<vi>
 #define vvll vector<vll>
 #define vvpii vector<vpii>
-#define vvpll ve ctor<vpll>
+#define vvpll vector<vpll>
 #define vvvi vector<vvi>
 
 // Macros
@@ -45,40 +45,26 @@ ll inf = 1e18;
 // Random Number Generator
 mt19937_64 rng((unsigned int) chrono::steady_clock::now().time_since_epoch().count());
 
-
-// Solution Template
-void solve(string input,string output) {
-    if(sz(input)==0){
-        cout<<output<<endl;
-        return;
-    }
-        REP(i,sz(input)){
-            char ch=input[i];
-            string left=input.substr(0,i);
-            string right=input.substr(i+1,sz(input));
-            solve(left+right,output+ch);
-         }
-}
-// optimized code using backtracking
-void backtrack(string &input ,int idx)
-
+bool ans=false;
+bool solve(vi &input,int target,int idx,int current)
 {
-    if(idx==sz(input)-1){
-        cout<<input<<endl;
-        return;
+    if(current==target)return true;
+    if(idx==input.size())return false;
+    if(input[idx]*current<=target){
+        current=current*input[idx];
+       ans= solve(input,target,idx+1,current);
+       if(ans)return true;
+        current=current/input[idx];
     }
-        REP1(i,idx,sz(input)){
-            swap(input[i],input[idx]); 
-            backtrack(input,idx+1);
-            swap(input[i],input[idx]);
-        }
+    solve(input,target,idx+1,current);
+    return ans;
+    
 }
-
 int main() {
     fastio;
-    string input;
-    cin>>input;
-        backtrack(input,0);
-    // solve(input,"");
+    vi input={2,3,2,5,4};
+    sort(all(input));
+    int target=27;
+   cout<<solve(input,target,0,1);
     return 0;
 }

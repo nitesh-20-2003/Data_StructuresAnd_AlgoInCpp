@@ -51,7 +51,7 @@ bool canPlaceQueen(int row, int col, int n)
     RREP(i, row - 1) {
         if (grid[i][col] == 'Q') return false;
     }
-    // Check left diagonal
+    // Check  left diagonal
     for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
         if (grid[i][j] == 'Q') return false;
     }
@@ -102,9 +102,12 @@ int main() {
     int n = 4;
     vector<vector<string>> solutions = nqueen(n);
 
-    for (const auto& solution : solutions) {
-        for (const auto& row : solution) {
+    for (const auto& solution : solutions) 
+    {
+        for (const auto& row : solution) 
+        {
             cout << row << endl;
+
         }
         cout << endl;
     }

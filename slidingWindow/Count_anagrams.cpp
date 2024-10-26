@@ -17,7 +17,7 @@ using namespace std;
 #define vvi vector<vi>
 #define vvll vector<vll>
 #define vvpii vector<vpii>
-#define vvpll ve ctor<vpll>
+#define vvpll vector<vpll>
 #define vvvi vector<vvi>
 
 // Macros
@@ -28,10 +28,10 @@ using namespace std;
 #define yn(ans) printf("%s\n", (ans) ? "Yes" : "No")
 #define YN(ans) printf("%s\n", (ans) ? "YES" : "NO")
 #define FOR(i, s, e, t) for (int (i) = (s); (i) < (e); (i) += (t))
-#define REP(i, e) for (int i = 0; i < (e); ++i)
-#define REP1(i, s, e) for (int i = (s); i < (e); ++i)
-#define RREP(i, e) for (int i = (e); i >= 0; --i)
-#define RREP1(i, e, s) for (int i = (e); i >= (s); --i)
+#define rep(i, e) for (int i = 0; i < (e); ++i)
+#define rep1(i, s, e) for (int i = (s); i < (e); ++i)
+#define rrep(i, e) for (int i = (e); i >= 0; --i)
+#define rrep1(i, e, s) for (int i = (e); i >= (s); --i)
 #define DEBUG printf("%d\n", __LINE__); fflush(stdout);
 
 // Constants
@@ -47,38 +47,51 @@ mt19937_64 rng((unsigned int) chrono::steady_clock::now().time_since_epoch().cou
 
 
 // Solution Template
-void solve(string input,string output) {
-    if(sz(input)==0){
-        cout<<output<<endl;
-        return;
+void solve() {
+    string txt="forxxorfxdofr";
+    string tar="for";
+    int count=0;
+    unordered_map<char,int>mp;
+    for(int i=0;i<tar.size();i++){
+        mp[tar[i]]++;
     }
-        REP(i,sz(input)){
-            char ch=input[i];
-            string left=input.substr(0,i);
-            string right=input.substr(i+1,sz(input));
-            solve(left+right,output+ch);
-         }
-}
-// optimized code using backtracking
-void backtrack(string &input ,int idx)
-
-{
-    if(idx==sz(input)-1){
-        cout<<input<<endl;
-        return;
-    }
-        REP1(i,idx,sz(input)){
-            swap(input[i],input[idx]); 
-            backtrack(input,idx+1);
-            swap(input[i],input[idx]);
+    int i=0;
+    int j=0;
+    int n=sz(txt);
+    while(j<n){
+        int len=j-i+1;
+        if(len<tar.size()){
+            if(mp.find(txt[j])!=mp.end()){
+                mp[txt[j]]--;
+            }
+            j++;
         }
+        else{
+            bool flag=false;
+           for(auto x:mp){
+            
+            if(x.second!=0){
+                flag=true;
+                break;
+            }
+           }
+            if(!flag){
+                count++;
+            }
+            mp[txt[i]]--;
+            i++;
+            j++;
+            mp[txt[j]]++;
+            
+
+        }
+
+    }
 }
 
 int main() {
     fastio;
-    string input;
-    cin>>input;
-        backtrack(input,0);
-    // solve(input,"");
+        solve();
+    
     return 0;
 }

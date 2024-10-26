@@ -46,6 +46,7 @@ while(j<n)
     j++;
 
 }
+cout<<endl;
 for(int ele:ans)
 {
     cout<<ele<<" ";

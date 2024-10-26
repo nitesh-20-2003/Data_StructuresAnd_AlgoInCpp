@@ -17,7 +17,7 @@ using namespace std;
 #define vvi vector<vi>
 #define vvll vector<vll>
 #define vvpii vector<vpii>
-#define vvpll ve ctor<vpll>
+#define vvpll vector<vpll>
 #define vvvi vector<vvi>
 
 // Macros
@@ -45,40 +45,13 @@ ll inf = 1e18;
 // Random Number Generator
 mt19937_64 rng((unsigned int) chrono::steady_clock::now().time_since_epoch().count());
 
-
 // Solution Template
-void solve(string input,string output) {
-    if(sz(input)==0){
-        cout<<output<<endl;
-        return;
-    }
-        REP(i,sz(input)){
-            char ch=input[i];
-            string left=input.substr(0,i);
-            string right=input.substr(i+1,sz(input));
-            solve(left+right,output+ch);
-         }
-}
-// optimized code using backtracking
-void backtrack(string &input ,int idx)
-
-{
-    if(idx==sz(input)-1){
-        cout<<input<<endl;
-        return;
-    }
-        REP1(i,idx,sz(input)){
-            swap(input[i],input[idx]); 
-            backtrack(input,idx+1);
-            swap(input[i],input[idx]);
-        }
+void solve() {
+    
 }
 
 int main() {
     fastio;
-    string input;
-    cin>>input;
-        backtrack(input,0);
-    // solve(input,"");
+        solve();
     return 0;
 }

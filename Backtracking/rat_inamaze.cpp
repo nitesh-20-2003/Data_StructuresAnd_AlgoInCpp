@@ -1,98 +1,83 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Type Aliases
-#define ll long long
-#define umi unordered_map<int,int>
-#define vi vector<int>
-#define mh priority_queue<int,vi>
-#define mhi priority_queue<int,vi,greater<int>>
-#define vll vector<ll>
-#define pii pair<int, int>
-#define pll pair<ll, ll>
-#define pdd pair<double, double>
-#define vpll vector<pll>
-#define vpii vector<pii>
-#define vpdd vector<pdd>
-#define vvi vector<vi>
-#define vvll vector<vll>
-#define vvpii vector<vpii>
-#define vvpll vector<vpll>
-#define vvvi vector<vvi>
+// Initialize a string direction which represents all the
+// directions.
+string direction = "DLRU";
 
-// Macros
-#define pb push_back
-#define mp make_pair
-#define all(x) (x).begin(), (x).end()
-#define sz(x) (int)(x).size()
-#define yn(ans) printf("%s\n", (ans) ? "Yes" : "No")
-#define YN(ans) printf("%s\n", (ans) ? "YES" : "NO")
-#define FOR(i, s, e, t) for (int (i) = (s); (i) < (e); (i) += (t))
-#define REP(i, e) for (int i = 0; i < (e); ++i)
-#define REP1(i, s, e) for (int i = (s); i < (e); ++i)
-#define RREP(i, e) for (int i = (e); i >= 0; --i)
-#define RREP1(i, e, s) for (int i = (e); i >= (s); --i)
-#define DEBUG printf("%d\n", __LINE__); fflush(stdout);
+// Arrays to represent change in rows and columns
+int dr[4] = { 1, 0, 0, -1 };
+int dc[4] = { 0, -1, 1, 0 };
 
-// Constants
-const int INF = 1e9 + 7;
-const ll LINF = 1e18 + 7;
-ll inf = 1e18;
-
-// Fast I/O
-#define fastio ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
-
-// Random Number Generator
-mt19937_64 rng((unsigned int) chrono::steady_clock::now().time_since_epoch().count());
-
-// Utility Functions
-template<class T> bool chmax(T &a, T b) {
-    if (a >= b) return false;
-    a = b; return true;
+// Function to check if cell(row, col) is inside the maze
+// and unblocked
+bool isValid(int row, int col, int n, vector<vector<int> >& maze)
+{
+    return row >= 0 && col >= 0 && row < n && col < n
+           && maze[row][col];
 }
 
-template<class T> bool chmin(T &a, T b) {
-    if (a <= b) return false;
-    a = b; return true;
-}
-
-template<class T> void print(vector<T> &v, bool withSize = false) {
-    if (withSize) cout << v.size() << endl;
-    REP(i, v.size()) cout << v[i] << " ";
-    cout << endl;
-}
-
-int ans;
-bool canWego(int n,int i,int j,vvi &grid){
-    return i>=0&&j>=0&& i<n&&j<n&& grid[i][j]==0;
-}
-void solve(vvi &grid,int n,int i,int j) {
-    if(i==n-1&& j==n-1){
-        ans+=1;
-        return;// base case
+// Function to get all valid paths
+void findPath(int row, int col, vector<vector<int> >& maze,
+              int n, vector<string>& ans,
+              string& currentPath)
+{
+    // If we reach the bottom right cell of the matrix, add
+    // the current path to ans and return
+    if (row == n - 1 && col == n - 1) {
+        ans.push_back(currentPath);
+        return;
     }
-    grid[i][j]==2;// 2 means visited;
-    //left
-    if(canWego(n,i,j-1,grid)){
-        f(grid,n,i,j-1);
-    }
-    // up
-      if(canWego(n,i-1,j,grid)){
-              f(grid,n,i-1,j);
-      }
-      // left
-        if(canWego(n,i,j+1,grid)){
-                  f(grid,n,i,j+1);
+    // Mark the current cell as blocked
+    maze[row][col] = 0;
+
+    for (int i = 0; i < 4; i++) {
+        // Find the next row based on the current row (row)
+        // and the dr[] array
+        int nextrow = row + dr[i];
+        // Find the next column based on the current column
+        // (col) and the dc[] array
+        int nextcol = col + dc[i];
+
+        // Check if the next cell is valid or not
+        if (isValid(nextrow, nextcol, n, maze)) {
+            currentPath += direction[i];
+            // Recursively call the FindPath function for
+            // the next cell
+            findPath(nextrow, nextcol, maze, n, ans,
+                     currentPath);
+            // Remove the last direction when backtracking
+            currentPath.pop_back();
         }
-        // right
-          if(canWego(n,i+1,j,grid)){
-              f(grid,n,i+1,j);
-          }
-    grid[i][j]=0;
+    }
+    // Mark the current cell as unblocked
+    maze[row][col] = 1;
 }
 
-int main() {
-    fastio;
-    
+int main()
+{
+    vector<vector<int> > maze = { { 1, 0, 0, 0 },
+                                  { 1, 1, 0, 1 },
+                                  { 1, 1, 0, 0 },
+                                  { 0, 1, 1, 1 } };
+
+    int n = maze.size();
+    // vector to store all the valid paths
+    vector<string> result;
+    // Store current path
+    string currentPath = "";
+
+    if (maze[0][0] != 0 && maze[n - 1][n - 1] != 0) {
+        // Function call to get all valid paths
+        findPath(0, 0, maze, n, result, currentPath);
+    }
+
+    if (result.size() == 0)
+        cout << -1;
+    else
+        for (int i = 0; i < result.size(); i++)
+            cout << result[i] << " ";
+    cout << endl;
+
     return 0;
 }

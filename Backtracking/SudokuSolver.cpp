@@ -32,10 +32,10 @@ using namespace std;
 #define yn(ans) printf("%s\n", (ans) ? "Yes" : "No")
 #define YN(ans) printf("%s\n", (ans) ? "YES" : "NO")
 #define FOR(i, s, e, t) for (int (i) = (s); (i) < (e); (i) += (t))
-#define REP(i, e) for (int i = 0; i < (e); ++i)
-#define REP1(i, s, e) for (int i = (s); i < (e); ++i)
-#define RREP(i, e) for (int i = (e); i >= 0; --i)
-#define RREP1(i, e, s) for (int i = (e); i >= (s); --i)
+#define rep(i, e) for (int i = 0; i < (e); ++i)
+#define rep1(i, s, e) for (int i = (s); i < (e); ++i)
+#define Rrep(i, e) for (int i = (e); i >= 0; --i)
+#define Rrep1(i, e, s) for (int i = (e); i >= (s); --i)
 #define DEBUG printf("%d\n", __LINE__); fflush(stdout);
 
 // Constants
@@ -52,12 +52,12 @@ class Solution {
 public:
 bool isSafe(vvc &board,int r,int c,int num){
     // row check
-    REP(i,9){
+    rep(i,9){
         if(board[r][i]-'0'==num)return false;
 
     }
     // col check
-    REP(i,9){
+    rep(i,9){
         if(board[i][c]-'0'==num)return false;
     }
     // each big cell check
@@ -75,7 +75,7 @@ bool f(vvc &board,int r,int c){
     if(r==9)return true;
     if(c==9)return f(board,r+1,0);
     if(board[r][c]!='.')return f(board,r,c+1);
-    REP1(i,1,9){
+    rep1(i,1,9){
         if(isSafe(board,r,c,i)){
             board[r][c]=i;
             bool retval=f(board,r,c+1);

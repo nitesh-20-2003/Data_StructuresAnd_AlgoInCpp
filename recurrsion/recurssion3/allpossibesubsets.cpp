@@ -11,8 +11,8 @@ void subst(string ans,string orignal,int x)
     subst(ans+ch,orignal,x+1);
     subst(ans,orignal,x+1);
 }
-int main()
+int main() 
 {
-subst("","ab",0);
+subst("","abc",0);
 return 0;
 }
