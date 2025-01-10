@@ -18,18 +18,12 @@ double fractional_knapsack(vector<int>&profit,vector<int>&weight,int n,int w)
 
     }
     sort(arr.begin(),arr.end(),comp);
-    // for(int i=0;i<n;i++)
-    // {
-    //   pair<int,int>p=arr[i];
-    //   cout<<p.first<<" "<<p.second;
-    //   cout<<endl;
-    // }
     double result=0;
     for(int i=0;i<n;i++)
     {
         if(arr[i].second<=w)
         {
-            result+=arr[i].first;
+        result+=arr[i].first;
         w-=arr[i].second;
         }
         else 
