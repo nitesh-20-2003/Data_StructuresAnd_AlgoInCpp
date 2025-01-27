@@ -38,7 +38,7 @@ while(q.size()>0&&i<n)
     node *l;
     node*r;
     if(arr[i]!=INT_MIN)
-    l=new node(arr[i]);
+    l=new node(arr[i]); 
     else l=NULL;
        if(j!=n&&arr[j]!=INT_MIN)
     r=new node(arr[j]);

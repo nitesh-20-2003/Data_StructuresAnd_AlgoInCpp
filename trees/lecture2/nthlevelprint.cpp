@@ -12,7 +12,7 @@ node(int val)
     this->right=NULL;
 }
 };
-void display(node *head,int target,int curr)
+void nthlevel(node *head,int target,int curr)
 {
     if(head==NULL)return ;
     if(curr==target)
@@ -20,9 +20,29 @@ void display(node *head,int target,int curr)
     cout<<head->val<<" ";
     return ;
     }
-    display(head->left,target,curr+1);
-    display(head->right,target,curr+1);
+   nthlevel(head->left,target,curr+1);
+   nthlevel(head->right,target,curr+1);
 }
+void nthlevelprintRev(node *head,int target,int curr)
+{
+  if(head==NULL)return ;
+    if(curr==target)
+    {
+    cout<<head->val<<" ";
+    return ;
+    }
+    nthlevelprintRev(head->right,target,curr+1);
+    nthlevelprintRev(head->left,target,curr+1);
+}
+void print(int n,node *head){
+    for(int i=0;i<n;i++)
+    {
+        // nthlevel(head,i,0);
+        cout<<endl;
+        nthlevelprintRev(head,i,0);
+    }
+}
+
 int main()
 {
 node *n=new node(10);
@@ -38,6 +58,6 @@ a->left=b;
 a->right=d;
 c->left=e;
 c->right=f;
-display(n,3,1);
+print(3,n);
 return 0;
 }

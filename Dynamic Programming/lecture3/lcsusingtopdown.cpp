@@ -9,15 +9,15 @@ using namespace std;
 string final = "";
 vector<vector<int>> dp(10005, vector<int>(10005, -1));
 
-int ans(string& f, string s, string t, int i, int j) 
+int ans(string f, string s, string t, int i, int j) 
 {
-  if(f.size()>final.size())final=f;
-  cout<<f<<endl;
-    
     if (i >= s.size() || j >= t.size()) 
     {
         return 0; // No common substring found at the end
     }
+  if(f.size()>final.size())final=f;
+
+    
     if (dp[i][j] != -1) {
         return dp[i][j]; // Use precomputed value if available
     }
@@ -37,7 +37,7 @@ int main() {
     string t = "cab";
     string f = "";
     ans(f, s, t, 0, 0);
- 
+ cout<<final<<endl;
     
     return 0;
 }

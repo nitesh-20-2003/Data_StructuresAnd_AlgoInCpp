@@ -36,18 +36,7 @@ return a;
  * * therfore min cost to jump from 2nd last to last stone is :dp[i]=min(dp[i],abs(hi-hj)+dp[i+j]);
  */
 
-void bu(){
-  // base case:)
-  dp[n-1]=0;
-  for(i=n-2;i>=0;i--)
-{  
-  for (int j=1;j<=k;j++)
-  {
-if (i+j>=h.size())break;
 
-  }
-  }
-}
 int main()
 {
 

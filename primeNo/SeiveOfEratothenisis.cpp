@@ -20,4 +20,4 @@ sieve[0]=0;
 sieve[1]=1;
 fillSieve(sieve);
 return 0;
-}
+}  

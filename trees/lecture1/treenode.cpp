@@ -19,6 +19,12 @@ void display(node *head)
     display(head->left);
      display(head->right);
 }
+int levels(node*head){
+    if(head==NULL)return 0;
+    int l=levels(head->left);
+    int r=levels(head->right);
+    return max(l,r)+1;
+}
 int main()
 {
 node *n=new node(10);

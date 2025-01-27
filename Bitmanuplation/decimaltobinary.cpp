@@ -1,5 +1,4 @@
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 int main()
 {
@@ -14,8 +13,10 @@ while(num>0)
     else 
     ans='1'+ans;
     num=num>>1;
-//    num=num/2;
+
 }
 cout<<ans;
+cout<<endl;
+int x=__builtin_popcount(ans);
 return 0;
 }

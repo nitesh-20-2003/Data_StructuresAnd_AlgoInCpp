@@ -15,25 +15,29 @@ node(int val)
 };
 void traversal(node*root)//traversal using queue
 {
-    queue<node*>q;
-    q.push(root);
+    queue<pair <node*,int>>q;
+    int n=0;
+    q.push({root,n});
+    unordered_map<int,int>mp;
     while(q.size()>0)
     {
-       node*temp=q.front();
-       cout<<temp->val;
+       auto temp=q.front();
+      
+       mp.insert({temp.first->val,temp.second});
        cout<<" ";
        q.pop() ;
-       if(temp->left)
-       {
-            q.push(temp->left);
-       }
-       if(temp->right)
-       {
-            q.push(temp->right);
-       }
+       if(temp.first->left) q.push({temp.first->left,temp.second+1});
+       
+       if(temp.first->right) q.push({temp.first->right,temp.second+1});
+       
        
     }
+      for (const auto& pair :mp) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+    
 }
+
 int main()
 {
 node *n=new node(10);
