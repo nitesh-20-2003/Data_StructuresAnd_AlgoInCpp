@@ -1,0 +1,37 @@
+##Expression | Meaning
+x & 1           Checks if x is odd (LSB is 1)
+x << k                Multiplies x by 2^k
+x >> k           Divides x by 2^k
+x & (x - 1)       Removes the lowest set bit
+x & -x              Isolates the lowest set bit
+~x            Bitwise NOT
+x ^ y        Bits that differ in x and y (parity change)
+
+
+
+
+
+
+
+
+
+// Check if ith bit is set
+(x >> i) & 1
+
+// Set ith bit
+x | (1 << i)
+
+// Unset ith bit
+x & ~(1 << i)
+
+// Toggle ith bit
+x ^ (1 << i)
+
+__builtin_popcount(x);     // For int
+__builtin_popcountll(x);   // For long long
+
+
+
+(x & (x - 1)) == 0 && x != 0
+
+x & (x - 1)

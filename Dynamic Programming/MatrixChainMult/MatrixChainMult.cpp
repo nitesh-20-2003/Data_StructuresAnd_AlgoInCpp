@@ -45,8 +45,6 @@ for(int len=3;len<=n;len++)
       
       dp[i][j]=min(dp[i][j],dp[i][k]+dp[k][j]+v[i]*v[j]*v[k]);
 
-    
-
     }
     ans=dp[i][j];
     }

@@ -14,4 +14,4 @@ while(n>0)
 }
 cout<<temp;
 return 0;
-}
+}63.

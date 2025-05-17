@@ -49,7 +49,7 @@ long long prims(int src, int n) {
                 parent[neighbours.first] = curr.second;
                 m[neighbours.first] = neighbours.second;
             }
-        }
+        } 
     }
     
     return result;

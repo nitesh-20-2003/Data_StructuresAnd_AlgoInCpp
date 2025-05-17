@@ -18,7 +18,7 @@ void permutation(string org ,string ans)
 
 int main()
 { 
-    string org="ab";
+    string org="abc";
 
 
 permutation(org,"");

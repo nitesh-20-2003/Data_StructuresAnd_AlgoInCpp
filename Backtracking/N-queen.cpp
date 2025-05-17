@@ -99,7 +99,7 @@ vector<vector<string>> nqueen(int n) {
 int main() {
     fastio;
 
-    int n = 4;
+    int n = 10;
     vector<vector<string>> solutions = nqueen(n);
 
     for (const auto& solution : solutions) 

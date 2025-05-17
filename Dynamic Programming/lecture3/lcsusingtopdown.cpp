@@ -7,7 +7,7 @@
 using namespace std;
 
 string final = "";
-vector<vector<int>> dp(10005, vector<int>(10005, -1));
+
 
 int ans(string f, string s, string t, int i, int j) 
 {
