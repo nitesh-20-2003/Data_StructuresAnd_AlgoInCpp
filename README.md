@@ -8,6 +8,23 @@ Last but not least, I have added Leetcode Qns also which can be easily solved us
 
 ### :memo:Different ways of using priority_queue (i.e. heap) :mount_fuji:
 
+### sort(intervals.begin(), intervals.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+    return a.second < b.second; // Sort by second element
+});
+
+### bool cmp(const pair<int, int>& a, const pair<int, int>& b) {
+    return a.second < b.second; // Sort by second element
+}
+
+ sort(intervals.begin(), intervals.end(), cmp);
+### struct Compare {
+    bool operator()(const pair<int, int>& a, const pair<int, int>& b) {
+        return a.second < b.second; // Sort by second element
+    }
+};
+
+sort(intervals.begin(), intervals.end(), Compare());
+
 - Default declarations
 ```c++
 priority_queue<int> pq;                            //creates max-heap
