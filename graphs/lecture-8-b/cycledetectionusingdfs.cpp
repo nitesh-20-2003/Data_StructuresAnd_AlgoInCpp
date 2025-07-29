@@ -19,7 +19,7 @@ bool dfs(int src,int parent,unordered_set<int>&vis)
     vis.insert(src);
     for(auto neighbours:graph[src])
     {
-       if( (vis.count(neighbours)!=0)&&neighbours=parent)
+       if ((vis.count(neighbours)!=0) && neighbours==parent)
         {
             return true;
             //cycle detected
