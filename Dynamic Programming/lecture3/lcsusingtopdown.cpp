@@ -7,6 +7,7 @@
 using namespace std;
 
 string final = "";
+vector<vector<int>> dp; // Declare dp table globally
 
 
 int ans(string f, string s, string t, int i, int j) 
@@ -31,13 +32,14 @@ int ans(string f, string s, string t, int i, int j)
                               ans(f, s, t, i, j + 1));
     }
 }
-
 int main() {
     string s = "abac";
     string t = "cab";
     string f = "";
+    dp.assign(s.size(), vector<int>(t.size(), -1)); // Initialize dp table
     ans(f, s, t, 0, 0);
- cout<<final<<endl;
+    cout << final << endl;
     
     return 0;
 }
+
